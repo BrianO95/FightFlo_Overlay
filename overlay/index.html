@@ -20,7 +20,7 @@
       --division-margin: 8px;
     }
 
-    body {
+    /* body {
       font-family: Arial, sans-serif;
       background: transparent;
       color: rgb(255, 255, 255);
@@ -28,7 +28,17 @@
       height: 100vh;
       display: grid;
       place-items: center;
-    }
+    } */
+
+    body {
+  font-family: Arial, sans-serif;
+  background: rgba(0, 0, 0, 0.85); /* dark grey fallback */
+  color: #fff;
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
 
     .page-grid {
       display: grid;
@@ -75,6 +85,7 @@
       border: none;
       border-radius: 6px;
       background: #444;
+      border: 1px solid rgb(255, 255, 255);
       color: white;
       cursor: pointer;
       font-size: 13px;
@@ -564,8 +575,8 @@
       <p>1. Use the <strong>right panel</strong> to add fights (Fighter A, Fighter B, division, champion markers, corner
         colors). Listed Fights can be edited, deleted, and rearranged.</p>
       <p>2. Navigate fights with <strong>Prev/Next</strong> buttons.</p>
-      <p>3. Adjust rounds with - RD / + RD / Reset.</p>
-      <p>4. Control the timer with Start / Stop / Reset (sets to RD 1) or set a custom time.</p>
+      <p>3. Adjust rounds with - RD / + RD / Reset (sets to RD 1).</p>
+      <p>4. Control the timer with Start / Stop / Reset or set a custom time. Stop also acts as pause. For custom time, be sure to enter as <strong>"mm" ":" "ss"</strong>, then set, then start.</p>
       <p>5. Style the overlay using the <strong>left panel</strong> (fonts, spacing, colors, shadows).</p>
       <p>6. The banner updates automatically when you add or edit fights.</p>
       <h2>Connect to OBS</h2>
@@ -590,7 +601,7 @@
       <p>3. Do <strong>NOT</strong> close out the overlay webpage tab on your internet browser while actively using it
         through OBS. You can surf the web on other tabs without interupting the overlay.</p>
       <p>4. Do <strong>NOT</strong> enter your data on the webpage and expect it to populate on OBS. It won't.</p>
-      <p>5. Do <strong>NOT</strong> expect your current data to hold beyond your current OBS session. One the source is
+      <p>5. Do <strong>NOT</strong> expect your current data to hold beyond your current OBS session. Once the source is
         removed, webpage tab closed, or OBS session is terminated, your data will be gone.</p>
 
 
