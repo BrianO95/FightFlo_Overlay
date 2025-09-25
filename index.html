@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FightFlo</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      color: #e50914; /* red for brand text */
+      position: relative; /* needed for top-left link */
+    }
+    /* Top-left overlay nav link */
+    .overlay-link {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .overlay-link:hover {
+      opacity: 0.7;
+    }
+    img {
+      max-width: 300px;
+      height: auto;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: Arial, sans-serif;
+      font-size: 64px;
+      letter-spacing: 20px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- top-left nav link -->
+  <a href="/overlay" class="overlay-link">Overlay</a>
+
+  <!-- Logo centered -->
+  <a href="/overlay">
+    <img src="fflogo.png" alt="FightFlo Logo">
+  </a>
+
+  <!-- Red spaced-out brand text -->
+  <h1>FIGHTFLO</h1>
+</body>
+</html>
