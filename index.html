@@ -3,38 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <title>FightFlo</title>
+  <!-- Font Awesome CDN for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
+    /* Reset body */
     body {
       margin: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column; /* stack logo + text vertically */
+      flex-direction: column;
+    }
+
+    /* General container style */
+    .container {
+      width: 100%;
+      display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #000;
-      color: #e50914; /* red Netflix-style tone */
     }
-    img {
+
+    /* Nav bar */
+    .navbar {
+      width: 100%;
+      height: 60px;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* logo left, nav items right */
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    /* Navbar logo */
+    .navbar img {
+      height: 40px;
+      width: auto;
+    }
+
+    /* Right side container (divider + overlay link + social icons) */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 20px;
+      width: 1px;
+      background-color: #555;
+    }
+
+    /* Overlay link */
+    .overlay-link {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      font-weight: 300;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .overlay-link:hover {
+      color: #e50914;
+    }
+
+    /* Social icons container */
+    .social-icons {
+      display: flex;
+      gap: 30px;
+      margin-right: 60px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #e50914; /* FightFlo red on hover */
+    }
+
+    /* Top container background */
+    .top {
+      flex: 0 0 30%;
+      background: url('bgimg.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    /* Bottom container background */
+    .bottom {
+      flex: 0 0 30%;
+      background: url('bgimg2.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    /* Middle container */
+    .middle {
+      flex: 0 0 40%;
+      background-color: #000;
+      position: relative;
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e50914;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Logo inside middle container (not clickable now) */
+    .middle img.logo {
       max-width: 300px;
       height: auto;
-      cursor: pointer;
-      margin-bottom: 20px; /* space between logo and text */
+      margin-bottom: 20px;
     }
-    h1 {
+
+    /* Title */
+    .middle h1 {
       font-family: Arial, sans-serif;
-      font-size: 64px;          /* tall text */
-      letter-spacing: 20px;     /* spaced out */
-      font-weight: 500;         /* bold */
+      font-size: 64px;
+      letter-spacing: 20px;
+      font-weight: 500;
       text-transform: uppercase;
       margin: 0;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    /* QR Section */
+    .qr-container {
+      position: absolute;
+      top: 55%;
+      right: 250px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qr-container img.qr-code {
+      width: 160px;
+      height: auto;
+    }
+
+    .qr-caption {
+      font-size: 14px;
+      color: #ccc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .ios-icon {
+      width: 50px;
+      height: auto;
+    }
+
+    /* Quotes */
+    .quotes {
+      position: absolute;
+      left: 80px;
+      bottom: 15%;
+      max-width: 700px;
+      color: #919191;
+      font-family: Arial, sans-serif;
+      text-align: left;
+    }
+
+    .quotes .quote {
+      font-style: italic;
+      font-size: 16px;
+      margin: 0 0 5px 0;
+    }
+
+    .quotes .author {
+      font-size: 14px;
+      color: #b8860b; /* dark gold */
+      margin: 0 0 50px 0;
+    }
+
+    /* Footer */
+    .footer {
+      width: 100%;
+      height: 50px;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #aaa;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+
+    /* Responsive navbar tweaks */
+    @media (max-width: 600px) {
+      .navbar {
+        height: 50px;
+        padding: 0 10px;
+      }
+      .navbar img {
+        height: 30px;
+      }
+      .overlay-link {
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+      .social-icons a {
+        font-size: 18px;
+      }
+      .quotes {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .qr-container {
+        position: static;
+        transform: none;
+        margin-top: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Clicking the logo takes you to the overlay -->
-  <a href="/overlay">
+  <!-- Navbar with logo, divider, overlay link, and social icons -->
+  <div class="navbar">
     <img src="FFLogo.png" alt="FightFlo Logo">
-  </a>
-  <h1>FIGHTFLO</h1>
+    <div class="nav-right">
+      <a href="/overlay" class="overlay-link" target="_blank" rel="noopener noreferrer">Stream Overlay</a>
+      <div class="divider"></div>
+      <div class="social-icons">
+        <a href="https://x.com/fightflo?s=21" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/team_fightflo?igsh=MTVwNjd3Y2VteHlmbw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/@fight_flo?si=bPvmGlEhzAAeSH81" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@fightflo_official?_t=ZP-901mZD7CHqI&_r=1" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top section -->
+  <div class="container top"></div>
+
+  <!-- Middle section -->
+  <div class="container middle">
+    <img src="FFLogo.png" alt="FightFlo Logo" class="logo">
+    <h1>FIGHTFLO</h1>
+
+    <!-- QR Section -->
+    <div class="qr-container">
+      <img src="FFqrCode.png" alt="Download on iOS" class="qr-code">
+      <p class="qr-caption">Use your camera & scan<br>(iOS only currently)</p>
+      <img src="ios-icon.png" alt="iOS Logo" class="ios-icon">
+    </div>
+
+    <!-- Quotes -->
+    <div class="quotes">
+      <p class="quote">"If you’re still Googling ‘what time is the fight,’ you deserve the spoilers."</p>
+      <p class="author">— Someone, somewhere… probably</p>
+
+      <p class="quote">"Glad I don't have sit through an entire sh*t Apex card to catch the ONE FIGHT I care about."</p>
+      <p class="author">— FightFlo user #69</p>
+
+      <p class="quote">"The problem is, when your favorite guy goes to a different org, 
+      you really have no f*cking clue where they go if it's not UFC. FightFlo bridges that gap!"</p>
+      <p class="author">— FightFlo founder's friend's 3rd uncle, twice-removed</p>
+    </div>
+  </div>
+
+  <!-- Bottom section -->
+  <div class="container bottom"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2025 FightFlo. All rights reserved.
+  </div>
 </body>
 </html>
