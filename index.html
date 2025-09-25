@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>FightFlo</title>
+  <!-- Make media queries work properly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Font Awesome CDN for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -90,6 +92,39 @@
     .social-icons a:hover {
       color: #e50914; /* FightFlo red on hover */
     }
+
+    /* Hamburger (hidden on desktop) */
+    .hamburger {
+      display: none;            /* desktop: hidden */
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    /* Mobile dropdown (hidden by default) */
+    .mobile-menu {
+      display: none;
+      position: fixed;          /* anchored to viewport just under navbar */
+      top: 60px;
+      right: 10px;
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      z-index: 20;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 6px;
+    }
+    .mobile-menu a + a { border-top: 1px solid #222; }
 
     /* Top container background */
     .top {
@@ -208,39 +243,47 @@
       box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
     }
 
-    /* Responsive navbar tweaks */
+    /* -------- MOBILE-ONLY CHANGES (≤ 600px) -------- */
     @media (max-width: 600px) {
+      /* Hide desktop nav bits */
+      .nav-right { display: none !important; }
+      /* Show hamburger on the far right */
+      .hamburger { display: block; margin-right: 20px;}
+
+      /* Keep your existing mobile tweaks for content stacking */
       .navbar {
         height: 50px;
         padding: 0 10px;
       }
-      .navbar img {
-        height: 30px;
-      }
-      .overlay-link {
-        font-size: 12px;
-        letter-spacing: 1px;
-      }
-      .social-icons a {
-        font-size: 18px;
-      }
+      .navbar img { height: 30px; }
+
       .quotes {
         position: static;
         text-align: center;
         margin-top: 20px;
+        max-width: 90%;
       }
       .qr-container {
         position: static;
         transform: none;
         margin-top: 20px;
       }
+
+      /* Slightly smaller elements for small screens */
+      .middle img.logo { max-width: 200px; }
+      .middle h1 { font-size: 36px; letter-spacing: 10px; }
+      .qr-container img.qr-code { width: 120px; }
+      .ios-icon { width: 36px; }
+      .quotes .quote { font-size: 14px; }
+      .quotes .author { font-size: 12px; margin-bottom: 24px; }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar with logo, divider, overlay link, and social icons -->
+  <!-- Navbar with logo, desktop nav-right, and mobile hamburger -->
   <div class="navbar">
     <img src="FFLogo.png" alt="FightFlo Logo">
+
     <div class="nav-right">
       <a href="/overlay" class="overlay-link" target="_blank" rel="noopener noreferrer">Stream Overlay</a>
       <div class="divider"></div>
@@ -250,6 +293,17 @@
         <a href="https://youtube.com/@fight_flo?si=bPvmGlEhzAAeSH81" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
         <a href="https://www.tiktok.com/@fightflo_official?_t=ZP-901mZD7CHqI&_r=1" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
       </div>
+    </div>
+
+    <!-- Mobile-only hamburger + dropdown (hidden on desktop via CSS) -->
+    <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="https://x.com/fightflo?s=21" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+      <a href="https://www.instagram.com/team_fightflo?igsh=MTVwNjd3Y2VteHlmbw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://youtube.com/@fight_flo?si=bPvmGlEhzAAeSH81" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://www.tiktok.com/@fightflo_official?_t=ZP-901mZD7CHqI&_r=1" target="_blank" rel="noopener noreferrer">TikTok</a>
     </div>
   </div>
 
@@ -264,7 +318,7 @@
     <!-- QR Section -->
     <div class="qr-container">
       <img src="FFqrCode.png" alt="Download on iOS" class="qr-code">
-      <p class="qr-caption">Use your camera & scan<br>(iOS only currently)</p>
+      <p class="qr-caption">(iOS only currently)</p>
       <img src="ios-icon.png" alt="iOS Logo" class="ios-icon">
     </div>
 
@@ -289,5 +343,12 @@
   <div class="footer">
     © 2025 FightFlo. All rights reserved.
   </div>
+
+  <!-- (Optional) Close the mobile dropdown after a click -->
+  <script>
+    document.getElementById('mobileMenu').addEventListener('click', function(e){
+      if (e.target.tagName.toLowerCase() === 'a') this.classList.remove('open');
+    });
+  </script>
 </body>
 </html>
